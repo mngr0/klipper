@@ -187,7 +187,7 @@ can_set_filter(uint32_t id1, uint32_t id2)
 void
 canbus_set_dataport(uint32_t id)
 {
-    can_set_filter(CANBUS_ID_UUID, id);
+    can_set_filter(CANBUS_ID_ADMIN, id);
 }
 
 void
@@ -292,7 +292,7 @@ can_init(void)
         ;
 
     /*##-2- Configure the CAN Filter #######################################*/
-    can_set_filter(CANBUS_ID_UUID, CANBUS_ID_SET);
+    can_set_filter(CANBUS_ID_ADMIN, 0);
 
     /*##-3- Configure Interrupts #################################*/
 
