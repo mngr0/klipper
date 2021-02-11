@@ -37,6 +37,21 @@ static const struct sercom_bus sercoms[] = {
 #endif
 };
 
+// // Serial port pins
+// #if CONFIG_MACH_SAME51
+// #define UARTx_IRQn UART_IRQn
+// static Uart * const Port = UART;
+// static const uint32_t Pmc_id = ID_UART;
+// static const uint32_t rx_pin = GPIO('A', 8), tx_pin = GPIO('A', 9);
+// DECL_CONSTANT_STR("RESERVE_PINS_serial", "PA8,PA9");
+// #elif CONFIG_MACH_SAME54
+// #define UARTx_IRQn UART0_IRQn
+// static Uart * const Port = UART0;
+// static const uint32_t Pmc_id = ID_UART0;
+// static const uint32_t rx_pin = GPIO('A', 9), tx_pin = GPIO('A', 10);
+// DECL_CONSTANT_STR("RESERVE_PINS_serial", "PA9,PA10");
+// #endif
+
 Sercom *
 sercom_enable_pclock(uint32_t sercom_id)
 {
@@ -64,70 +79,7 @@ struct sercom_pad {
 };
 
 static const struct sercom_pad sercom_pads[] = {
-#if CONFIG_MACH_SAMD21
-    { 0, GPIO('A', 8), 0, 'C'},
-    { 0, GPIO('A', 9), 1, 'C'},
-    { 0, GPIO('A', 10), 2, 'C'},
-    { 0, GPIO('A', 11), 3, 'C'},
-    { 0, GPIO('A', 4), 0, 'D'},
-    { 0, GPIO('A', 5), 1, 'D'},
-    { 0, GPIO('A', 6), 2, 'D'},
-    { 0, GPIO('A', 7), 3, 'D'},
-    { 1, GPIO('A', 16), 0, 'C'},
-    { 1, GPIO('A', 17), 1, 'C'},
-    { 1, GPIO('A', 18), 2, 'C'},
-    { 1, GPIO('A', 19), 3, 'C'},
-    { 1, GPIO('A', 0), 0, 'D'},
-    { 1, GPIO('A', 1), 1, 'D'},
-    { 1, GPIO('A', 30), 2, 'D'},
-    { 1, GPIO('A', 31), 3, 'D'},
-    { 2, GPIO('A', 12), 0, 'C'},
-    { 2, GPIO('A', 13), 1, 'C'},
-    { 2, GPIO('A', 14), 2, 'C'},
-    { 2, GPIO('A', 15), 3, 'C'},
-    { 2, GPIO('A', 8), 0, 'D'},
-    { 2, GPIO('A', 9), 1, 'D'},
-    { 2, GPIO('A', 10), 2, 'D'},
-    { 2, GPIO('A', 11), 3, 'D'},
-    { 3, GPIO('A', 22), 0, 'C'},
-    { 3, GPIO('A', 23), 1, 'C'},
-    { 3, GPIO('A', 24), 2, 'C'},
-    { 3, GPIO('A', 25), 3, 'C'},
-    { 3, GPIO('A', 16), 0, 'D'},
-    { 3, GPIO('A', 17), 1, 'D'},
-    { 3, GPIO('A', 18), 2, 'D'},
-    { 3, GPIO('A', 19), 3, 'D'},
-    { 3, GPIO('A', 20), 2, 'D'},
-    { 3, GPIO('A', 21), 3, 'D'},
-    { 4, GPIO('B', 12), 0, 'C'},
-    { 4, GPIO('B', 13), 1, 'C'},
-    { 4, GPIO('B', 14), 2, 'C'},
-    { 4, GPIO('B', 15), 3, 'C'},
-    { 4, GPIO('B', 8), 0, 'D'},
-    { 4, GPIO('B', 9), 1, 'D'},
-    { 4, GPIO('B', 10), 2, 'D'},
-    { 4, GPIO('B', 11), 3, 'D'},
-    { 4, GPIO('A', 12), 0, 'D'},
-    { 4, GPIO('A', 13), 1, 'D'},
-    { 4, GPIO('A', 14), 2, 'D'},
-    { 4, GPIO('A', 15), 3, 'D'},
-    { 5, GPIO('B', 16), 0, 'C'},
-    { 5, GPIO('B', 17), 1, 'C'},
-    { 5, GPIO('A', 20), 2, 'C'},
-    { 5, GPIO('A', 21), 3, 'C'},
-    { 5, GPIO('A', 22), 0, 'D'},
-    { 5, GPIO('A', 23), 1, 'D'},
-    { 5, GPIO('A', 24), 2, 'D'},
-    { 5, GPIO('A', 25), 3, 'D'},
-    { 5, GPIO('B', 30), 0, 'D'},
-    { 5, GPIO('B', 31), 1, 'D'},
-    { 5, GPIO('B', 22), 2, 'D'},
-    { 5, GPIO('B', 23), 3, 'D'},
-    { 5, GPIO('B', 2), 0, 'D'},
-    { 5, GPIO('B', 3), 1, 'D'},
-    { 5, GPIO('B', 0), 2, 'D'},
-    { 5, GPIO('B', 1), 3, 'D'},
-#elif CONFIG_MACH_SAME51
+#if CONFIG_MACH_SAME54
     { 0, GPIO('A', 8), 0, 'C'},
     { 0, GPIO('A', 9), 1, 'C'},
     { 0, GPIO('A', 10), 2, 'C'},
