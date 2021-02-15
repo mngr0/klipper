@@ -174,15 +174,16 @@ usb_set_configure(void)
 void
 usb_request_bootloader(void)
 {
+    return;
     if (!CONFIG_FLASH_START)
         return;
     // Bootloader hack
     irq_disable();
-#if CONFIG_MACH_SAMD21
-    writel((void*)0x20007FFC, 0x07738135);
-#elif CONFIG_MACH_SAMD51
+// #if CONFIG_MACH_SAMD21
+//     writel((void*)0x20007FFC, 0x07738135);
+// #elif CONFIG_MACH_SAMD51
     writel((void*)(HSRAM_ADDR + HSRAM_SIZE - 4), 0xf01669ef);
-#endif
+// #endif
     NVIC_SystemReset();
 }
 
@@ -234,7 +235,7 @@ usbserial_init(void)
     // configure usb clock
     enable_pclock(USB_GCLK_ID, ID_USB);
     // configure USBD+ and USBD- pins
-    uint32_t ptype = CONFIG_MACH_SAMD21 ? 'G' : 'H';
+    uint32_t ptype = 'H';
     gpio_peripheral(GPIO('A', 24), ptype, 0);
     gpio_peripheral(GPIO('A', 25), ptype, 0);
     uint32_t trim = GET_FUSE(USB_FUSES_TRIM);
@@ -250,13 +251,13 @@ usbserial_init(void)
     USB->DEVICE.CTRLB.reg = 0;
     // enable irqs
     USB->DEVICE.INTENSET.reg = USB_DEVICE_INTENSET_EORST;
-#if CONFIG_MACH_SAMD21
-    armcm_enable_irq(USB_Handler, USB_IRQn, 1);
-#elif CONFIG_MACH_SAMD51
+// #if CONFIG_MACH_SAMD21
+//     armcm_enable_irq(USB_Handler, USB_IRQn, 1);
+// #elif CONFIG_MACH_SAME51
     armcm_enable_irq(USB_Handler, USB_0_IRQn, 1);
     armcm_enable_irq(USB_Handler, USB_1_IRQn, 1);
     armcm_enable_irq(USB_Handler, USB_2_IRQn, 1);
     armcm_enable_irq(USB_Handler, USB_3_IRQn, 1);
-#endif
+//#endif
 }
 DECL_INIT(usbserial_init);
