@@ -48,8 +48,8 @@ serial_init(void)
     uint32_t areg = (SERCOM_USART_CTRLA_MODE(1)
                      | SERCOM_USART_CTRLA_DORD
                      | SERCOM_USART_CTRLA_SAMPR(1)
-                     | SERCOM_USART_CTRLA_RXPO(3)
-                     | SERCOM_USART_CTRLA_TXPO(1));
+                     | SERCOM_USART_CTRLA_RXPO(1)
+                     | SERCOM_USART_CTRLA_TXPO(0));
     su->CTRLA.reg = areg;
     su->CTRLB.reg = SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN;
     uint32_t freq = get_pclock_frequency(SERCOM2_GCLK_ID_CORE);
