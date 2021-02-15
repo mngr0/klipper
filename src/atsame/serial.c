@@ -43,15 +43,45 @@ serial_init(void)
     gpio_peripheral(GPIO('A', 4), 'D', 0);
     gpio_peripheral(GPIO('A', 5), 'D', 0);
     // Configure serial
+
+
+
+	// if (!hri_sercomusart_is_syncing(hw, SERCOM_USART_SYNCBUSY_SWRST)) {
+	// 	uint32_t mode = _usarts[i].ctrl_a & SERCOM_USART_CTRLA_MODE_Msk;
+	// 	if (hri_sercomusart_get_CTRLA_reg(hw, SERCOM_USART_CTRLA_ENABLE)) {
+	// 		hri_sercomusart_clear_CTRLA_ENABLE_bit(hw);
+	// 		hri_sercomusart_wait_for_sync(hw, SERCOM_USART_SYNCBUSY_ENABLE);
+	// 	}
+	// 	hri_sercomusart_write_CTRLA_reg(hw, SERCOM_USART_CTRLA_SWRST | mode);
+	// }
+	// hri_sercomusart_wait_for_sync(hw, SERCOM_USART_SYNCBUSY_SWRST);
+
+	// hri_sercomusart_write_CTRLA_reg(hw, _usarts[i].ctrl_a);
+	// hri_sercomusart_write_CTRLB_reg(hw, _usarts[i].ctrl_b);
+	// hri_sercomusart_write_CTRLC_reg(hw, _usarts[i].ctrl_c);
+	// if ((_usarts[i].ctrl_a & SERCOM_USART_CTRLA_SAMPR(0x1)) || (_usarts[i].ctrl_a & SERCOM_USART_CTRLA_SAMPR(0x3))) {
+	// 	((Sercom *)hw)->USART.BAUD.FRAC.BAUD = _usarts[i].baud;
+	// 	((Sercom *)hw)->USART.BAUD.FRAC.FP   = _usarts[i].fractional;
+	// } else {
+	// 	hri_sercomusart_write_BAUD_reg(hw, _usarts[i].baud);
+	// }
+
+	// hri_sercomusart_write_RXPL_reg(hw, _usarts[i].rxpl);
+	// hri_sercomusart_write_DBGCTRL_reg(hw, _usarts[i].debug_ctrl);
+
+
+
+
     SercomUsart *su = &SERCOM0->USART;
     su->CTRLA.reg = 0;
     uint32_t areg = (SERCOM_USART_CTRLA_MODE(1)
                      | SERCOM_USART_CTRLA_DORD
                      | SERCOM_USART_CTRLA_SAMPR(1)
-                     | SERCOM_USART_CTRLA_RXPO(3)
+                     | SERCOM_USART_CTRLA_RXPO(0)
                      | SERCOM_USART_CTRLA_TXPO(1));
     su->CTRLA.reg = areg;
     su->CTRLB.reg = SERCOM_USART_CTRLB_RXEN | SERCOM_USART_CTRLB_TXEN;
+
     uint32_t freq = get_pclock_frequency(SERCOM0_GCLK_ID_CORE);
     uint32_t baud8 = freq / (2 * CONFIG_SERIAL_BAUD);
     su->BAUD.reg = (SERCOM_USART_BAUD_FRAC_BAUD(baud8 / 8)
