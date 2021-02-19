@@ -174,7 +174,7 @@ usb_set_configure(void)
 void
 usb_request_bootloader(void)
 {
-    return;
+
     if (!CONFIG_FLASH_START)
         return;
     // Bootloader hack

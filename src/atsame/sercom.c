@@ -79,7 +79,7 @@ struct sercom_pad {
 };
 
 static const struct sercom_pad sercom_pads[] = {
-#if CONFIG_MACH_SAME54
+//#if CONFIG_MACH_SAME54
     { 0, GPIO('A', 8), 0, 'C'},
     { 0, GPIO('A', 9), 1, 'C'},
     { 0, GPIO('A', 10), 2, 'C'},
@@ -222,7 +222,7 @@ static const struct sercom_pad sercom_pads[] = {
     { 7, GPIO('A', 30), 2, 'C'},
     { 7, GPIO('A', 31), 3, 'C'},
   #endif
-#endif
+//#endif
 };
 
 static const struct sercom_pad *
