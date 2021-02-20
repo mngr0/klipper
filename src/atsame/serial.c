@@ -31,6 +31,7 @@ SERCOM2_Handler(void)
             SERCOM2->USART.DATA.reg = data;
     }
 }
+
 #if CONFIG_MACH_SAME54
 DECL_CONSTANT_STR("RESERVE_PINS_serial", "PB24,PB25");
 #warning "same54 serial"
