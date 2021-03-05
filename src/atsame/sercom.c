@@ -37,21 +37,6 @@ static const struct sercom_bus sercoms[] = {
 #endif
 };
 
-// // Serial port pins
-// #if CONFIG_MACH_SAME51
-// #define UARTx_IRQn UART_IRQn
-// static Uart * const Port = UART;
-// static const uint32_t Pmc_id = ID_UART;
-// static const uint32_t rx_pin = GPIO('A', 8), tx_pin = GPIO('A', 9);
-// DECL_CONSTANT_STR("RESERVE_PINS_serial", "PA8,PA9");
-// #elif CONFIG_MACH_SAME54
-// #define UARTx_IRQn UART0_IRQn
-// static Uart * const Port = UART0;
-// static const uint32_t Pmc_id = ID_UART0;
-// static const uint32_t rx_pin = GPIO('A', 9), tx_pin = GPIO('A', 10);
-// DECL_CONSTANT_STR("RESERVE_PINS_serial", "PA9,PA10");
-// #endif
-
 Sercom *
 sercom_enable_pclock(uint32_t sercom_id)
 {
