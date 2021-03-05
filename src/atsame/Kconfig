@@ -36,7 +36,7 @@ config MCU
 
 config FLASH_SIZE
     hex
-    default 0x80000 if MACH_ATSAME 
+    default 0x40000 if MACH_ATSAME 
 
 
 config RAM_START
@@ -45,7 +45,7 @@ config RAM_START
 
 config RAM_SIZE
     hex
-    default 0x30000 if MACH_ATSAME 
+    default 0x20000 if MACH_ATSAME 
 
 
 config STACK_SIZE
@@ -54,8 +54,6 @@ config STACK_SIZE
 
 choice
     prompt "Clock Reference"
-    config CLOCK_REF_X32K
-        bool "32.768Khz crystal"
     config CLOCK_REF_INTERNAL
         bool "Internal clock"
 endchoice
